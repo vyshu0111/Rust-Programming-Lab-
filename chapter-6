@@ -1,1 +1,43 @@
 
+1. Write a program that implements Traits
+a. Define a trait named `Animal`
+b. Define a method `make_sound` that needs to be implemented by types
+implementing the
+c. Implement the `Animal` trait for the `Dog` struct which prints “Woof!”
+d. Implement the `Animal` trait for the `Cat` struct which prints “Meow!”
+e. Define A function ‘animal_sounds’ that takes any type implementing the `Animal`
+trait
+
+trait Animal {
+    fn make_sound(&self);
+}
+
+struct Dog;
+struct Cat;
+
+impl Animal for Dog {
+    fn make_sound(&self) {
+        println!("Woof!");
+    }
+}
+
+impl Animal for Cat {
+    fn make_sound(&self) {
+        println!("Meow!");
+    }
+}
+
+fn animal_sounds<T: Animal>(animal: T) {
+    animal.make_sound();
+}
+
+fn main() {
+    let dog = Dog;
+    let cat = Cat;
+    
+    animal_sounds(dog);
+    animal_sounds(cat);
+}
+
+2. Write a program to Find the Area of a Triangle using modules
+
