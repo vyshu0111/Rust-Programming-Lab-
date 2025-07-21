@@ -1,1 +1,28 @@
+rogramming Exercises
+1. Write a program to implement Type Casting Operator.
 
+fn main() {
+    let integer: i32 = 10;
+    let float: f64 = 3.14;
+
+    let casted_to_float = integer as f64;
+    let casted_to_int = float as i32;
+
+    println!("Integer value: {}", integer);
+    println!("Float value: {}", float);
+    println!("Casted to float: {}", casted_to_float);
+    println!("Casted to integer: {}", casted_to_int);
+}
+
+2. Write a program to implement Borrowing and Dereferencing Operators
+
+fn main() {
+    let x = 10;
+    let y = &x;
+
+    println!("x: {}", x);
+    println!("y: {}", y);
+
+    let z = *y;
+    println!("Dereferenced value of y: {}", z);
+}
