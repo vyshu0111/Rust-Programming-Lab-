@@ -1,1 +1,189 @@
+Programming Exercises
+1. Write a program to Find The Factorial using functions.
+
+fn factorial(n: u32) -> u32 {
+    if n == 0 {
+        1
+    } else {
+        n * factorial(n - 1)
+    }
+}
+
+fn main() {
+    let number = 5;
+    let result = factorial(number);
+
+    println!("Factorial of {} is {}", number, result);
+}
+
+2. Write a function test_divisibility_by_3_4 which will check whether a given integer
+number is divisible by 3 or 4.
+a. If the number is divisible by both return 0
+b. If the number is divisible by 3 only return 1
+c. If the number is divisible by 4 only return 2
+d. If the number is not divisible by both, return -1
+
+fn test_divisibility_by_3_4(number: i32) -> i32 {
+    if number % 3 == 0 && number % 4 == 0 {
+        0
+    } else if number % 3 == 0 {
+        1
+    } else if number % 4 == 0 {
+        2
+    } else {
+        -1
+    }
+}
+
+fn main() {
+    let number = 12;
+
+    let result = test_divisibility_by_3_4(number);
+    println!("Result: {}", result);
+}
+
+3. Write a program to demonstrate Pass by Value and Pass by 
+
+fn pass_by_value(mut x: i32) {
+    x += 10;
+    println!("Inside pass_by_value: {}", x); // x will be modified
+}
+
+fn pass_by_reference(x: &mut i32) {
+    *x += 10;
+    println!("Inside pass_by_reference: {}", x); // x will be modified
+}
+
+fn main() {
+    let mut num = 5;
+
+    pass_by_value(num); // Pass by value
+    println!("After pass_by_value: {}", num); // num remains unchanged
+
+    pass_by_reference(&mut num); // Pass by reference
+    println!("After pass_by_reference: {}", num); // num will be modified
+}
+
+
+4. Write a function calculate_area_perimeter() that takes x and y (length and width of a rectangle) as a parameter to the function and returns a tuple (area, perimeter).
+
+fn calculate_area_perimeter(x: f64, y: f64) -> (f64, f64) {
+    let area = x * y;
+    let perimeter = 2.0 * (x + y);
+    (area, perimeter)
+}
+
+fn main() {
+    let length = 5.0;
+    let width = 3.0;
+    
+    let (area, perimeter) = calculate_area_perimeter(length, width);
+    
+    println!("Area: {}, Perimeter: {}", area, perimeter);
+}
+
+5. Write a function arr_square() that returns the Array of Squares
+
+fn arr_square(n: usize) -> Vec<i32> {
+    let mut squares = Vec::new();
+    for i in 1..=n {
+        squares.push(i * i);
+    }
+    squares
+}
+
+fn main() {
+    let n = 5;
+    let squares = arr_square(n);
+    println!("{:?}", squares);
+}
+
+6. Write a recursive function fibonacci() that takes a positive integer number n as a parameter and returns the nth Fibonacci term in that range.
+
+fn fibonacci(n: u32) -> u32 {
+    if n == 0 {
+        0
+    } else if n == 1 {
+        1
+    } else {
+        fibonacci(n - 1) + fibonacci(n - 2)
+    }
+}
+
+fn main() {
+    let n = 6;
+    println!("Fibonacci of {}: {}", n, fibonacci(n));
+}
+
+7. Write a program to create a String
+
+fn main() {
+    let my_string = String::from("Hello, Rust!");
+    println!("{}", my_string);
+}
+
+8. Implement the string manipulation operations using core methods of String objects:
+
+fn main() {
+    let mut my_string = String::from(" Hello, World! ");
+    
+    // a. str.capacity()
+    println!("Capacity: {}", my_string.capacity());
+    
+    // b. str.contains("sub_str")
+    println!("Contains 'World': {}", my_string.contains("World"));
+    
+    // c. str.replace(replace_from, replace_to)
+    let replaced_string = my_string.replace("World", "Rust");
+    println!("Replaced String: {}", replaced_string);
+    
+    // d. string.trim()
+    let trimmed_string = my_string.trim();
+    println!("Trimmed String: '{}'", trimmed_string);
+}
+
+9. Write a program to tokenize and iterate over a string
+
+fn main() {
+    let my_string = "This is a test string";
+    let tokens = my_string.split_whitespace();
+    
+    for token in tokens {
+        println!("{}", token);
+    }
+}
+
+10. Write a program to push a string into a string.
+
+fn main() {
+    let mut base_string = String::from("Hello");
+    let append_string = " World!";
+    
+    base_string.push_str(append_string);
+    
+    println!("{}", base_string);
+}
+
+11. Write a program to find all words starting with a “c” in a string passed as a parameter.
+Concatenate them together and return the result.
+
+
+fn find_words_starting_with_c(input: &str) -> String {
+    let mut result = String::new();
+    
+    for word in input.split_whitespace() {
+        if word.starts_with('c') || word.starts_with('C') {
+            result.push_str(word);
+            result.push(' '); // Add a space between words
+        }
+    }
+
+    result.trim_end().to_string() // Remove the trailing space
+}
+
+fn main() {
+    let input_string = "Cats are cute, and cows are clever.";
+    let result = find_words_starting_with_c(input_string);
+    println!("Words starting with 'c': {}", result);
+}
 
