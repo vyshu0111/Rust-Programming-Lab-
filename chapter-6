@@ -41,3 +41,129 @@ fn main() {
 
 2. Write a program to Find the Area of a Triangle using modules
 
+mod geometry {
+    pub mod triangle {
+        pub fn area(base: f64, height: f64) -> f64 {
+            0.5 * base * height
+        }
+    }
+}
+
+fn main() {
+    let base = 5.0;
+    let height = 10.0;
+    let area = geometry::triangle::area(base, height);
+    println!("The area of the triangle is: {}", area);
+}
+
+3. Write a program that demonstrates ownership transfer by creating variables and passing them between functions.
+
+fn take_ownership(s: String) {
+    println!("I own: {}", s);
+}
+
+fn main() {
+    let s1 = String::from("Hello, Ownership!");
+    take_ownership(s1); // Ownership is transferred to the function
+    // println!("{}", s1); // This would cause a compile-time error, as s1 has been moved
+}
+
+4. Experiment with different scenarios to understand the Rust compiler's behavior in terms of ownership and borrowing.
+
+fn borrow_string(s: &String) {
+    println!("Borrowed string: {}", s);
+}
+
+fn main() {
+    let s = String::from("Rust is awesome!");
+    
+    borrow_string(&s); // Borrowing `s` (no ownership transfer)
+    
+    println!("Original string: {}", s); // `s` can still be used here
+}
+
+
+5. Write a program to read data from a file and write the results back to another file using Rust's file I/O capabilities.
+
+use std::fs::File;
+use std::io::{self, Read, Write};
+
+fn main() -> io::Result<()> {
+    let mut input_file = File::open("input.txt")?;
+    let mut contents = String::new();
+    input_file.read_to_string(&mut contents)?;
+
+    let mut output_file = File::create("output.txt")?;
+    output_file.write_all(contents.as_bytes())?;
+
+    Ok(())
+}
+
+6. Rust program that demonstrates different error handling techniques
+
+use std::fs::File;
+use std::io::{self, Read};
+
+fn read_file() -> io::Result<String> {
+    let mut file = File::open("nonexistent.txt")?;
+    let mut contents = String::new();
+    file.read_to_string(&mut contents)?;
+    Ok(contents)
+}
+
+fn main() {
+    match read_file() {
+        Ok(contents) => println!("File contents: {}", contents),
+        Err(e) => println!("Error reading file: {}", e),
+    }
+}
+
+7. Rust program to implement Recoverable Errors with Result
+
+use std::fs::File;
+use std::io::{self, Read};
+
+fn read_file() -> Result<String, io::Error> {
+    let mut file = File::open("input.txt")?;
+    let mut contents = String::new();
+    file.read_to_string(&mut contents)?;
+    Ok(contents)
+}
+
+fn main() {
+    match read_file() {
+        Ok(contents) => println!("File contents: {}", contents),
+        Err(e) => println!("Error: {}", e),
+    }
+}
+
+8. Write unit tests for a Rust module, covering various functionalities and edge cases.
+
+mod math {
+    pub fn add(a: i32, b: i32) -> i32 {
+        a + b
+    }
+
+    pub fn multiply(a: i32, b: i32) -> i32 {
+        a * b
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_add() {
+        assert_eq!(math::add(2, 3), 5);
+    }
+
+    #[test]
+    fn test_multiply() {
+        assert_eq!(math::multiply(2, 3), 6);
+    }
+}
+
+
+
+
