@@ -1,1 +1,217 @@
 
+1. Given a vector with an even number of elements, remove the last element from the input vector, and then the middle element. Then insert the sum of the remaining elements to the end of the resulting vector.
+
+fn process_vector(mut vec: Vec<i32>) -> Vec<i32> {
+    if vec.len() % 2 == 0 {
+        vec.pop(); // Remove the last element
+        let middle_index = vec.len() / 2;
+        vec.remove(middle_index); // Remove the middle element
+        let sum: i32 = vec.iter().sum(); // Sum of the remaining elements
+        vec.push(sum); // Insert the sum at the end
+    }
+    vec
+}
+
+fn main() {
+    let input_vector = vec![1, 2, 3, 4, 5, 6];
+    let result = process_vector(input_vector);
+    println!("{:?}", result); // Output will be [1, 2, 4, 6, 13]
+}
+
+2. Write a program to Calculate Distance Between Two Points:
+a. A struct Point is given which has two items, x and y.
+b. The function test is given which has two instances of points initialised with some
+value of x and y.
+c. The task is to calculate the distance between the two points.
+d. The distance between two points is:
+e. Return the value of distance
+
+use std::f64;
+
+#[derive(Debug)]
+struct Point {
+    x: f64,
+    y: f64,
+}
+
+fn calculate_distance(p1: &Point, p2: &Point) -> f64 {
+    let x_diff = p2.x - p1.x;
+    let y_diff = p2.y - p1.y;
+    (x_diff.powi(2) + y_diff.powi(2)).sqrt() // Euclidean distance formula
+}
+
+fn main() {
+    let point1 = Point { x: 3.0, y: 4.0 };
+    let point2 = Point { x: 6.0, y: 8.0 };
+    
+    let distance = calculate_distance(&point1, &point2);
+    println!("Distance between the points: {}", distance);
+}
+
+3. Write a program to Invoke a Static Method on Struct
+
+struct Calculator;
+
+impl Calculator {
+    fn add(a: i32, b: i32) -> i32 {
+        a + b
+    }
+}
+
+fn main() {
+    let result = Calculator::add(5, 10);
+    println!("The sum is: {}", result);
+}
+
+4. Create a struct representing a person with fields such as name, age, and address. Implement methods to perform operations on the person.
+
+struct Person {
+    name: String,
+    age: u32,
+    address: String,
+}
+
+impl Person {
+    fn new(name: String, age: u32, address: String) -> Person {
+        Person { name, age, address }
+    }
+
+    fn display_info(&self) {
+        println!("Name: {}, Age: {}, Address: {}", self.name, self.age, self.address);
+    }
+
+    fn birthday(&mut self) {
+        self.age += 1;
+    }
+}
+
+fn main() {
+    let mut person = Person::new("John Doe".to_string(), 30, "123 Main St.".to_string());
+    person.display_info();
+
+    person.birthday();
+    println!("After birthday:");
+    person.display_info();
+}
+
+5. Create a struct representing a geometric shape and implement methods to calculate its area and perimeter.
+
+struct Rectangle {
+    width: f64,
+    height: f64,
+}
+
+impl Rectangle {
+    fn new(width: f64, height: f64) -> Rectangle {
+        Rectangle { width, height }
+    }
+
+    fn area(&self) -> f64 {
+        self.width * self.height
+    }
+
+    fn perimeter(&self) -> f64 {
+        2.0 * (self.width + self.height)
+    }
+}
+
+fn main() {
+    let rect = Rectangle::new(5.0, 3.0);
+    println!("Area: {}", rect.area());
+    println!("Perimeter: {}", rect.perimeter());
+}
+
+6. Write a program to Find If the Day Is a Weekend
+a. An enum Days has been provided to you. It has all the days of the week.
+b. A method is_weekend() is incomplete.
+c. The task is to complete the method
+d. If the day is a weekend it returns 1
+e. If the day is a weekday it returns 0
+
+enum Days {
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday,
+    Sunday,
+}
+
+impl Days {
+    fn is_weekend(&self) -> i32 {
+        match self {
+            Days::Saturday | Days::Sunday => 1,
+            _ => 0,
+        }
+    }
+}
+
+fn main() {
+    let day1 = Days::Saturday;
+    let day2 = Days::Wednesday;
+    
+    println!("Is Saturday a weekend? {}", day1.is_weekend()); // Output: 1
+    println!("Is Wednesday a weekend? {}", day2.is_weekend()); // Output: 0
+}
+
+
+7. Define an enum representing different types of geometric shapes (e.g., circle, square, triangle). Implement a function that calculates the area of a shape based on its variant.
+
+enum Shape {
+    Circle(f64),
+    Square(f64),
+    Triangle(f64, f64),
+}
+
+impl Shape {
+    fn area(&self) -> f64 {
+        match self {
+            Shape::Circle(radius) => std::f64::consts::PI * radius * radius,
+            Shape::Square(side) => side * side,
+            Shape::Triangle(base, height) => 0.5 * base * height,
+        }
+    }
+}
+
+fn main() {
+    let circle = Shape::Circle(5.0);
+    println!("Circle area: {}", circle.area());
+
+    let square = Shape::Square(4.0);
+    println!("Square area: {}", square.area());
+
+    let triangle = Shape::Triangle(3.0, 6.0);
+    println!("Triangle area: {}", triangle.area());
+}
+
+8. Define an enum representing different types of vehicles and use pattern matching to print their respective characteristics.
+
+enum Vehicle {
+    Car(String, u32),
+    Bike(String, u32),
+    Truck(String, u32),
+}
+
+impl Vehicle {
+    fn characteristics(&self) {
+        match self {
+            Vehicle::Car(make, year) => println!("Car: Make: {}, Year: {}", make, year),
+            Vehicle::Bike(make, year) => println!("Bike: Make: {}, Year: {}", make, year),
+            Vehicle::Truck(make, year) => println!("Truck: Make: {}, Year: {}", make, year),
+        }
+    }
+}
+
+fn main() {
+    let car = Vehicle::Car("Toyota".to_string(), 2020);
+    car.characteristics();
+
+    let bike = Vehicle::Bike("Yamaha".to_string(), 2021);
+    bike.characteristics();
+
+    let truck = Vehicle::Truck("Ford".to_string(), 2019);
+    truck.characteristics();
+}
+
+
